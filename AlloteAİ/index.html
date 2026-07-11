@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="az" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>Allote AI — Süni İntellekt Köməkçin</title>
+<meta name="description" content="Allote AI — sürətli, səmimi süni intellekt söhbət köməkçisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+
+<div class="bg-fx" aria-hidden="true"></div>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar is-collapsed" id="sidebar">
+    <div class="sidebar__inner">
+      <div class="sidebar__header">
+        <button class="new-chat-btn" id="newChatBtn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Yeni söhbət
+        </button>
+      </div>
+      <div class="sidebar__list" id="conversationList"></div>
+      <div class="sidebar__account" id="sidebarAccount"></div>
+      <div class="sidebar__footer">
+        <img src="menu.jpg" alt="Allote AI" class="logo-img logo-img--sm">
+        <span>Allote <em>AI</em></span>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="main">
+    <!-- ============ HEADER ============ -->
+    <header class="topbar">
+      <div class="brand">
+        <button class="icon-btn" id="sidebarToggle" title="Söhbətlər" aria-label="Söhbətlər siyahısı">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <img src="menu.jpg" alt="Allote AI" class="logo-img logo-img--sm">
+        <div class="brand__text">
+          <h1>Allote <em>AI</em></h1>
+          <p class="status"><span class="status__dot"></span>Онлайн — danışmağa hazıram</p>
+        </div>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="icon-btn" id="memoryBtn" title="Yaddaş Paneli" aria-label="Yaddaş Paneli">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5a5.5 5.5 0 0 0-5.5 5.5c0 1.6.7 2.9 1.6 3.9-.9.6-1.6 1.7-1.6 3.1a3.5 3.5 0 0 0 3.5 3.5h4a3.5 3.5 0 0 0 3.5-3.5c0-1.4-.7-2.5-1.6-3.1.9-1 1.6-2.3 1.6-3.9A5.5 5.5 0 0 0 12 2.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.5 15v2.2M14.5 15v2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" id="clearChat" title="Bu söhbəti təmizlə" aria-label="Bu söhbəti təmizlə">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-8 0 .7 12a2 2 0 0 0 2 1.9h4.6a2 2 0 0 0 2-1.9L17 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn" id="settingsBtn" title="Ayarlar" aria-label="Ayarlar">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="1.7"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V19.5a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.04-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.04H4.5a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.04 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H10.6a1.7 1.7 0 0 0 1.04-1.56V4.5a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V10.6a1.7 1.7 0 0 0 1.56 1.04H19.5a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.04Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ CHAT ============ -->
+    <main class="chat" id="chat" aria-live="polite">
+      <div class="chat__inner" id="chatInner">
+        <!-- messages injected here by script.js -->
+      </div>
+    </main>
+
+    <!-- ============ COMPOSER ============ -->
+    <footer class="composer">
+      <form class="composer__bar" id="composerForm">
+        <button type="button" class="icon-btn composer__attach" id="scrollBottomBtn" title="Aşağı sürüşdür" aria-label="Aşağı sürüşdür">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14M6 12l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <textarea
+          id="messageInput"
+          class="composer__input"
+          placeholder="Allote-a yaz…"
+          rows="1"
+          autocomplete="off"
+          maxlength="4000"
+        ></textarea>
+
+        <button type="submit" class="send-btn" id="sendBtn" aria-label="Göndər">
+          <svg viewBox="0 0 24 24" fill="none" class="send-icon"><path d="M4.5 12 20 4.5 15 12l5 7.5L4.5 12Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" class="loader-icon"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="40 60"/></svg>
+        </button>
+      </form>
+      <p class="composer__hint">Allote AI səhv edə bilər — vacib məlumatları yoxlamağı unutma.</p>
+    </footer>
+  </div>
+
+</div>
+
+<!-- ============ MEMORY TOAST ============ -->
+<div class="memory-toast" id="memoryToast"></div>
+
+<!-- ============ MEMORY DASHBOARD MODAL ============ -->
+<div class="modal-overlay" id="memoryOverlay">
+  <div class="modal memory-modal" role="dialog" aria-label="Yaddaş Paneli">
+    <div class="modal__header">
+      <div class="mem-header__title">
+        <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 2.5a5.5 5.5 0 0 0-5.5 5.5c0 1.6.7 2.9 1.6 3.9-.9.6-1.6 1.7-1.6 3.1a3.5 3.5 0 0 0 3.5 3.5h4a3.5 3.5 0 0 0 3.5-3.5c0-1.4-.7-2.5-1.6-3.1.9-1 1.6-2.3 1.6-3.9A5.5 5.5 0 0 0 12 2.5Z" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Yaddaş Paneli</h3>
+      </div>
+      <button class="icon-btn" id="closeMemory" aria-label="Bağla">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="mem-stats" id="memStats"></div>
+
+    <div class="mem-toolbar">
+      <div class="mem-search">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.7"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input type="text" id="memSearch" placeholder="Xatirələrdə axtar…" autocomplete="off">
+      </div>
+      <select id="memSort" class="mem-select">
+        <option value="importance">Vacibliyə görə</option>
+        <option value="recent">Ən son yenilənən</option>
+        <option value="confidence">Əminliyə görə</option>
+        <option value="alpha">Əlifba sırası</option>
+      </select>
+      <div class="mem-view-toggle">
+        <button class="mem-view-btn is-active" id="memViewGrid" title="Şəbəkə görünüşü" aria-label="Şəbəkə görünüşü">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.4" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <button class="mem-view-btn" id="memViewTimeline" title="Zaman xətti" aria-label="Zaman xətti">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mem-chips" id="memChips"></div>
+
+    <div class="mem-body mem-body--grid" id="memBody"></div>
+
+    <div class="mem-footer">
+      <button class="mem-mini-btn" id="memAddBtn">+ Yeni xatirə</button>
+      <div class="mem-footer__right">
+        <input type="file" id="memImportInput" accept="application/json" hidden>
+        <button class="mem-mini-btn mem-mini-btn--ghost" id="memImportBtn">İdxal et</button>
+        <button class="mem-mini-btn mem-mini-btn--ghost" id="memExport">İxrac et</button>
+        <button class="mem-mini-btn mem-mini-btn--danger" id="memClearAll">Hamısını sil</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SETTINGS MODAL ============ -->
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal settings-modal" role="dialog" aria-label="Ayarlar">
+    <div class="modal__header">
+      <h3>Ayarlar</h3>
+      <button class="icon-btn" id="closeSettings" aria-label="Bağla">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <h4>Tema</h4>
+      <div class="theme-grid">
+        <button class="theme-card" data-theme-btn="dark">
+          <span class="theme-card__preview theme-preview--dark"></span>
+          <span class="theme-card__label">Qaranlıq</span>
+        </button>
+        <button class="theme-card" data-theme-btn="light">
+          <span class="theme-card__preview theme-preview--light"></span>
+          <span class="theme-card__label">Açıq</span>
+        </button>
+        <button class="theme-card" data-theme-btn="aurora">
+          <span class="theme-card__preview theme-preview--aurora"></span>
+          <span class="theme-card__label">Aurora</span>
+        </button>
+      </div>
+
+      <hr class="modal__divider">
+
+      <h4>Söhbət faylı (Notepad)</h4>
+      <p class="modal__hint">Söhbətlərini kompüterindəki .txt fayla avtomatik yaza bilərsən — hər mesajdan sonra özü əlavə olunur.</p>
+      <div class="ts-status" id="transcriptStatus"></div>
+      <div class="ts-actions">
+        <button class="mem-mini-btn" id="transcriptConnectBtn">Fayl seç və qoşul</button>
+        <button class="mem-mini-btn mem-mini-btn--danger" id="transcriptDisconnectBtn">Ayır</button>
+        <button class="mem-mini-btn" id="transcriptReauthBtn">İcazəni yenilə</button>
+      </div>
+      <div class="ts-actions">
+        <button class="mem-mini-btn mem-mini-btn--ghost" id="transcriptDownloadCurrent">Bu söhbəti .txt endir</button>
+        <button class="mem-mini-btn mem-mini-btn--ghost" id="transcriptDownloadAll">Bütün söhbətləri .txt endir</button>
+      </div>
+
+      <hr class="modal__divider">
+
+      <h4>Hesab</h4>
+      <p class="modal__hint">Hesab yaradıb daxil olsan, tema/yaddaş/söhbətlərin bu brauzerdə hesabına bağlı qalır və silinmir.</p>
+      <button class="mem-mini-btn" id="acctOpenFromMemory">Hesab paneli</button>
+
+      <hr class="modal__divider">
+
+      <h4>Söhbətlər</h4>
+      <button class="danger-btn" id="deleteAllChats">Bütün söhbətləri sil</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="modal-overlay" id="authOverlay">
+  <div class="modal auth-modal" role="dialog" aria-label="Hesab">
+    <div class="modal__header">
+      <h3>Hesab</h3>
+      <button class="icon-btn" id="closeAuth" aria-label="Bağla">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <div class="auth-tabs">
+        <button class="auth-tab is-active" id="authTabLogin" type="button">Daxil ol</button>
+        <button class="auth-tab" id="authTabRegister" type="button">Hesab yarat</button>
+      </div>
+      <form id="authForm" class="auth-form">
+        <label class="auth-label">İstifadəçi adı
+          <input type="text" id="authUsername" class="auth-input" autocomplete="username" placeholder="məs: rasul" required>
+        </label>
+        <label class="auth-label">Şifrə
+          <input type="password" id="authPassword" class="auth-input" autocomplete="current-password" placeholder="••••••" required>
+        </label>
+        <p class="auth-error" id="authError"></p>
+        <button type="submit" class="new-chat-btn auth-submit" id="authSubmitBtn">Daxil ol</button>
+      </form>
+      <button class="mem-mini-btn mem-mini-btn--ghost auth-guest" id="authGuestBtn">Qonaq kimi davam et</button>
+      <p class="auth-note">Qeyd: hesab bu cihaz/brauzerdə lokal saxlanılır — başqa cihazda görünməyəcək.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Config artıq index.html-in içindədir (ayrı fayl deyil) —
+  // beləliklə "config.js yüklənmədi" problemi mümkün deyil.
+  const ALLOTE_CONFIG = {
+    // 🔑 Groq API açarını bura yaz
+    GROQ_API_KEY: "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",
+
+    // 🧠 İstifadə olunacaq model
+    GROQ_MODEL: "openai/gpt-oss-120b",
+
+    // ✍️ Allote AI-nin xarakteri / sistem təlimatı
+    SYSTEM_PROMPT:
+      "Sən Allote AI-san — Rəsul Bayramov tərəfindən yaradılmış, Azərbaycan dilində səmimi, " +
+      "köməkçi və bir az zarafatcıl süni intellektsən. Cavablarını qısa, aydın və dostyana " +
+      "şəkildə ver. Lazım olduqda başlıqlardan və siyahılardan istifadə et, amma həddindən " +
+      "artıq uzatma.",
+  };
+</script>
+<script src="auth.js?v=1"></script>
+<script src="memory.js?v=1"></script>
+<script src="transcript.js?v=1"></script>
+<script src="image.js?v=1"></script>
+<script src="script.js?v=5"></script>
+</body>
+</html>
